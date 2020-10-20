@@ -25,4 +25,6 @@
 - 监听输入框代码的编写
 - 监听ViewModel数据，刷新Rv
 - 由于使用到了MaterialDesign的CardView，所有我们要使用设置MaterialDesign的NoActionBarStyle
-- 修改ainActivity的代码用上Fragment即可
+- 修改mainActivity的代码用上Fragment即可
+- 天气详情页面
+- 天气详情页面UI编写，以及搜索结果跳转到详情页面

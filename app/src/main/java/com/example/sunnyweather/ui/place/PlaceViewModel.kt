@@ -1,4 +1,4 @@
-package com.example.sunnyweather.ui
+package com.example.sunnyweather.ui.place
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
