@@ -1,6 +1,8 @@
 package com.example.sunnyweather.logic
 
+import android.util.Log
 import androidx.lifecycle.liveData
+import com.example.sunnyweather.logic.dao.PlaceDao
 import com.example.sunnyweather.logic.model.Weather
 import com.example.sunnyweather.logic.network.SunnyWeatherNetwork
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +17,10 @@ import kotlin.coroutines.CoroutineContext
  * 通过仓库类决定数据是从网络获取，还是本地数据库拿
  */
 object Repository {
+
+    fun savePlace(place: Place) = PlaceDao.savePlace(place)
+    fun getSavePlace() = PlaceDao.getSavedPlace()
+    fun isPlaceSaved() = PlaceDao.isPlacedSaved()
 
     fun searchPlaces(query: String) = fire(Dispatchers.IO) {
         val placeResponse = SunnyWeatherNetwork.searchPlaces(query)
@@ -37,7 +43,9 @@ object Repository {
             }
             val realtimeResponse = deferredRealtime.await()
             val dailyResponse = deferredDaily.await()
+
             if (realtimeResponse.status == "ok" && dailyResponse.status == "ok") {
+                Log.d("拿到了数据", realtimeResponse.status)
                 val weather = Weather(realtimeResponse.result.realtime, dailyResponse.result.daily)
                 Result.success(weather)
             } else {

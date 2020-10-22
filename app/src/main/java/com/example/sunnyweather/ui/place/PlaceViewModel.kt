@@ -9,6 +9,10 @@ import retrofit2.Response
 
 class PlaceViewModel : ViewModel() {
 
+    fun savePlace(place: Place) = Repository.savePlace(place)
+    fun getSavedPlace() = Repository.getSavePlace()
+    fun isPlaceSaved() = Repository.isPlaceSaved()
+
     private val searchLiveData = MutableLiveData<String>()
 
     val placeList = ArrayList<Place>()
