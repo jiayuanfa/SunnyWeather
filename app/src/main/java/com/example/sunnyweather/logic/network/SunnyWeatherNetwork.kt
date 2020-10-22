@@ -21,6 +21,15 @@ object SunnyWeatherNetwork {
     // 声明一个方法 以发起搜索城市的请求
     suspend fun searchPlaces(query: String) = placeService.searchPlaces(query).await()
 
+    /**
+     * 实时天气
+     */
+    private val weatherService = ServiceCreator.create<WeatherService>()
+    suspend fun getDailyWeather(lng: String, lat: String) =
+            weatherService.getDailyWeather(lng, lat).await()
+    suspend fun getRealtimeWeather(lng: String, lat: String) =
+            weatherService.getRealtimeWeather(lng, lat).await()
+
     // 使用协程 挂起 返回
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
